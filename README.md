@@ -29,9 +29,11 @@ Mote info: https://www.youtube.com/watch?v=e_EfmKdP2ng
 
 - Once you're happy that your pihole is doing what you want, it's time to undo any per-device changes and deploy the pihole to your network.
 
-    - (In router) Configure pihole as _SOLE_ v4 dhcp / dns server on your network.
+    - (In router) DISABLE dhcp + dns on your router and configure pihole as _SOLE_ v4 dhcp + dns server on your network.
 
-    - (In router) Configure pihole as _SOLE_ v6 dhcp / dns server on your network (requires auto config to be enabled on same advanced > v6 settings page). More info: https://discourse.pi-hole.net/t/how-to-get-rid-of-ghost-dns-servers/61953/9
+    - (In router) DISABLE dhcp + dns on your router and configure pihole as _SOLE_ v6 dhcp + dns server on your network (requires auto config to be enabled on same advanced > v6 settings page). More info: https://discourse.pi-hole.net/t/how-to-get-rid-of-ghost-dns-servers/61953/9
+
+    - NOTE: Secondary dns resolvers are not used as a backup in case the first one fails, they are used _simultaneously_ (and thus must be removed for pihole to do its job).
 
     - _(Might also have to enable v6 support in pihole settings?)_
 
