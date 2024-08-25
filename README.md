@@ -87,6 +87,22 @@ sudo systemctl restart pihole-FTL
 
 Source: https://bartonbytes.com/posts/configure-pi-hole-for-dns-over-tls/
 
+## (Optional) Add a reverse proxy server to use names for local services behind ports
+
+More info: https://www.youtube.com/watch?v=nmE28_BA83w
+
+- Spin up nginx proxy manager (docker compose file included).
+
+- Add an A-record and some CNAME records (optional) in pihole that point to the proxy.
+
+    - WARNING: If nginx proxy manager is running in macvlan, it will be unable to communicate with its host (which is currently your baremetal pihole install), and thus unable to forward requests there (like pihole.local for now) - since pihole admin interface resides on port 80, current workaround for this setup is to simply use A-record for resolving pihole.local.
+
+    - WARNING: Some services (homeassistant, proxmox, etc) require websocket support (enabled in the proxy host's settings - you'll be able to navigate to the login page, but you won't be able to log in otherwise)
+
+- In the proxy, add a 'proxy host' that collates requests for your added A-record / CNAME records and points them all to the proxy's IP address and the port it's listening on (81).
+
+- ...Rinse and repeat for your other services.
+
 ## Troubleshooting and post-deployment
 
 - (Windows) To verify pihole's v4 and v6 dns providers have propogated to your device: `ipconfig /all`
