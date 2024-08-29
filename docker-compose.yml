@@ -7,8 +7,12 @@ services:
     environment:
       DISABLE_IPV6: true
     networks:
+      # custom_bridge:
+      #   ipv4_address: 192.168.100.222
+      #   priority: 900 # proxy manager container MUST know what order to use these networks!
       net:
         ipv4_address: 192.168.1.222
+        priority: 1000
     ports:
       - 49152:80 # Public HTTP Port
       - 443:443  # Public HTTPS Port
@@ -19,7 +23,16 @@ services:
     restart: unless-stopped
 
 networks:
+  # custom_bridge:
+  #   name: custom_bridge
+  #   driver: bridge
+  #   # external: true
+  #   ipam:
+  #     config:
+  #       - subnet: 192.168.100.0/24
+  #         gateway: 192.168.100.1
   net:
+    name: net
     driver: macvlan
     driver_opts:
       parent: eth0
