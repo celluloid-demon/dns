@@ -103,6 +103,8 @@ More info: https://www.youtube.com/watch?v=nmE28_BA83w
 
 - ...Rinse and repeat for your other services.
 
+- NOTE: SSL cert setup (for https) solves several issues you were having on other operating systems / mobile devices forcing use of https, despite manually setting http for requests (point duckdns domain to your proxy manager's INTERNAL ip address, set up ONE "wildcard" ssl certificate for "domain" + "*.domain" combined, set for it a wait period of about a minute to propogate with dns challenge, and save)
+
 ## Troubleshooting and post-deployment
 
 - (Windows) To verify pihole's v4 and v6 dns providers have propogated to your device: `ipconfig /all`
